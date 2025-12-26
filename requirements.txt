@@ -1,0 +1,4 @@
+httpx
+tldextract
+ua-generator
+dnspython
