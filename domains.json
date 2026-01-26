@@ -18,10 +18,16 @@
     "time_change": "2025-03-21 12:20:27"
   },
   "cb01new": {
-    "domain": "uno",
-    "full_url": "https://cb01uno.uno/",
-    "old_domain": "net",
+    "domain": "stream",
+    "full_url": "https://cb01uno.stream/",
+    "old_domain": "stream",
     "time_change": "2026-01-08 16:28:15"
+  },
+  "cb01_2": {
+    "domain": "it",
+    "full_url": "https://cronosquadredellaversilia.it/",
+    "old_domain": "it",
+    "time_change": "2026-01-26 08:17:48"
   },
   "guardaserie": {
     "domain": "biz",
