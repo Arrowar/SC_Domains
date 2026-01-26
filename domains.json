@@ -1,9 +1,9 @@
 {
   "toonitalia": {
     "domain": "vip",
-    "full_url": "https://toonitalia.vip",
+    "full_url": "https://toonitalia.vip/",
     "old_domain": "vip",
-    "time_change": "2025-12-15 14:45:50"
+    "time_change": "2026-01-26 08:17:46"
   },
   "animeunity": {
     "domain": "so",
@@ -17,7 +17,7 @@
     "old_domain": "ac",
     "time_change": "2025-03-21 12:20:27"
   },
-    "cb01new": {
+  "cb01new": {
     "domain": "uno",
     "full_url": "https://cb01uno.uno/",
     "old_domain": "net",
@@ -31,9 +31,9 @@
   },
   "guardoserie_2": {
     "domain": "blog",
-    "full_url": "https://guardoserie.blog",
+    "full_url": "https://guardoserie.blog/",
     "old_domain": "blog",
-    "time_change": "2026-01-15 14:05:49"
+    "time_change": "2026-01-26 08:17:49"
   },
   "altadefinizione": {
     "domain": "lat",
@@ -55,56 +55,56 @@
   },
   "guardaplay": {
     "domain": "fit",
-    "full_url": "https://guardaplay.fit",
+    "full_url": "https://guardaplay.fit/",
     "old_domain": "fit",
-    "time_change": "2026-01-28 18:37:03"
+    "time_change": "2026-01-26 08:17:53"
   },
   "eurostreamings": {
     "domain": "art",
-    "full_url": "https://eurostreamings.art",
+    "full_url": "https://eurostreamings.art/",
     "old_domain": "art",
-    "time_change": "2026-02-01 09:34:10"
+    "time_change": "2026-01-26 08:17:53"
   },
   "filmpertutti": {
     "domain": "my",
-    "full_url": "https://film-pertutti.my",
+    "full_url": "https://film-pertutti.my/",
     "old_domain": "my",
-    "time_change": "2026-02-03 15:22:45"
+    "time_change": "2026-01-26 08:17:54"
   },
   "tantifilm": {
     "domain": "online",
-    "full_url": "https://tantifilm.online",
+    "full_url": "https://tantifilm.online/",
     "old_domain": "online",
-    "time_change": "2026-02-04 18:30:12"
+    "time_change": "2026-01-26 08:17:55"
   },
   "tantifilm_2": {
     "domain": "pro",
-    "full_url": "https://tanti-film.pro",
+    "full_url": "https://tanti-film.pro/",
     "old_domain": "pro",
-    "time_change": "2026-02-04 19:48:29"
+    "time_change": "2026-01-26 08:17:55"
   },
   "casaciname": {
     "domain": "homes",
-    "full_url": "https://casa-cinema.homes",
+    "full_url": "https://casa-cinema.homes/",
     "old_domain": "homes",
-    "time_change": "2026-02-05 20:10:58"
+    "time_change": "2026-01-26 08:17:56"
   },
   "filmsenzalimite": {
     "domain": "one",
-    "full_url": "https://filmsenzalimite.one",
+    "full_url": "https://filmsenzalimite.one/",
     "old_domain": "one",
-    "time_change": "2026-02-06 08:05:33"
+    "time_change": "2026-01-26 08:17:56"
   },
   "mappl": {
     "domain": "tv",
-    "full_url": "https://mappl.tv",
+    "full_url": "https://mappl.tv/",
     "old_domain": "tv",
-    "time_change": "2026-02-06 10:15:42"
+    "time_change": "2026-01-26 08:17:56"
   },
   "hydrahd": {
     "domain": "ru",
-    "full_url": "https://hydrahd.ru",
+    "full_url": "https://hydrahd.ru/",
     "old_domain": "ru",
-    "time_change": "2026-02-07 11:25:51"
+    "time_change": "2026-01-26 08:17:56"
   }
 }
