@@ -1,4 +1,4 @@
-httpx
+curl-cffi
 tldextract
 ua-generator
 dnspython

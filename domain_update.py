@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 
 # External libraries
-import httpx
+from curl_cffi import requests
 import tldextract
 import ua_generator
 import dns.resolver
@@ -128,6 +128,7 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
     final_url = None
     final_domain_info = None
     url_to_test_in_loop = None
+    impersonate = "chrome120"
 
     for protocol in ['https://', 'http://']:
         try:
@@ -139,8 +140,14 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
             redirect_count = 0
 
             while redirect_count < max_redirects:
-                with httpx.Client(verify=False, follow_redirects=False, timeout=5) as client:
-                    response = client.get(current_url, headers=headers)
+                response = requests.get(
+                    current_url, 
+                    headers=headers,
+                    allow_redirects=False,
+                    verify=False,
+                    timeout=5,
+                    impersonate=impersonate
+                )
 
                 redirect_info = {'url': current_url, 'status_code': response.status_code}
                 redirect_chain.append(redirect_info)
@@ -183,8 +190,8 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
                 log(f"Got 403 Forbidden, but captured {len(redirect_chain)-1} redirects before that", "SUCCESS")
                 break
 
-        except httpx.RequestError as e:
-            log(f"Error connecting to {protocol}{original_info['full_domain']}: {str(e)}", "ERROR")
+        except Exception as e:
+            log(f"Unexpected error connecting to {protocol}{original_info['full_domain']}: {str(e)}", "ERROR")
     
     url_for_auto_redirect = input_url 
     if url_to_test_in_loop:
@@ -196,40 +203,34 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
         log("Trying alternate method with automatic redirect following")
 
         try:
-            with httpx.Client(verify=False, follow_redirects=True, timeout=5) as client:
-                response_auto = client.get(url_for_auto_redirect, headers=headers)
+            response_auto = requests.get(
+                url_for_auto_redirect,
+                headers=headers,
+                allow_redirects=True,
+                verify=False,
+                timeout=5,
+                impersonate=impersonate
+            )
 
             log(f"Connected with auto-redirects: Status {response_auto.status_code}")
-
-            if response_auto.history:
-                log(f"Found {len(response_auto.history)} redirects with auto-following", "SUCCESS")
-
-                for r_hist in response_auto.history:
-                    redirect_info_auto = {'url': str(r_hist.url), 'status_code': r_hist.status_code}
-                    redirects.append(redirect_info_auto)
-                    log(f"Auto-redirect: {r_hist.url} (Status: {r_hist.status_code})")
-
-                final_url = str(response_auto.url)
-                final_domain_info = parse_url(final_url)
-                for redirect_hist_item in response_auto.history:
-                    redirect_domain_val = parse_url(str(redirect_hist_item.url))
-                    if redirect_domain_val and original_info and redirect_domain_val['full_domain'] != original_info['full_domain']:
-                        new_domains.append({'domain': redirect_domain_val['full_domain'], 'url': str(redirect_hist_item.url), 'source': 'auto-redirect'})
+            final_url_from_auto = str(response_auto.url)
             
-            current_final_url_info = parse_url(str(response_auto.url))
+            if final_url_from_auto != url_for_auto_redirect:
+                log(f"Redirect detected via auto-following", "SUCCESS")
+                
+                final_url = final_url_from_auto
+                final_domain_info = parse_url(final_url)
+                
+                current_final_url_info = parse_url(final_url_from_auto)
+                
+                if current_final_url_info and original_info and current_final_url_info['full_domain'] != original_info['full_domain']:
+                    is_already_added = any(d['domain'] == current_final_url_info['full_domain'] for d in new_domains)
+                    if not is_already_added:
+                        new_domains.append({'domain': current_final_url_info['full_domain'], 'url': final_url_from_auto, 'source': 'final_url_auto'})
+                    log(f"Final URL from auto-redirect: {final_url}", "SUCCESS")
 
-            if current_final_url_info and original_info and current_final_url_info['full_domain'] != original_info['full_domain']:
-                is_already_added = any(d['domain'] == current_final_url_info['full_domain'] and d['source'] == 'auto-redirect' for d in new_domains)
-                if not is_already_added:
-                    new_domains.append({'domain': current_final_url_info['full_domain'], 'url': str(response_auto.url), 'source': 'final_url_auto'})
-                final_url = str(response_auto.url)
-                final_domain_info = current_final_url_info
-                log(f"Final URL from auto-redirect: {final_url}", "SUCCESS")
-
-        except httpx.RequestError as e:
-            log(f"Error with auto-redirect attempt: {str(e)}", "ERROR")
-        except NameError: 
-            log("Error: URL for auto-redirect attempt was not defined.", "ERROR")
+        except Exception as e:
+            log(f"Unexpected error with auto-redirect attempt: {str(e)}", "ERROR")
     
     unique_domains = []
     seen_domains = set()
