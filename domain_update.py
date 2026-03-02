@@ -128,7 +128,7 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
     final_url = None
     final_domain_info = None
     url_to_test_in_loop = None
-    impersonate = "chrome120"
+    final_status = None
 
     for protocol in ['https://', 'http://']:
         try:
@@ -146,7 +146,7 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
                     allow_redirects=False,
                     verify=False,
                     timeout=5,
-                    impersonate=impersonate
+                    impersonate="chrome142"
                 )
 
                 redirect_info = {'url': current_url, 'status_code': response.status_code}
@@ -209,7 +209,7 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
                 allow_redirects=True,
                 verify=False,
                 timeout=5,
-                impersonate=impersonate
+                impersonate="chrome142"
             )
 
             log(f"Connected with auto-redirects: Status {response_auto.status_code}")
@@ -269,7 +269,12 @@ def find_new_domain(input_url, output_file=None, verbose=True, json_output=False
         'redirects': redirects,
         'log': log_buffer
     }
-    simplified_json_output = {'full_url': final_url, 'domain': results_final_domain_tld}
+    simplified_json_output = {
+        'full_url': final_url,
+        'domain': results_final_domain_tld,
+        'ip': orig_ip,
+        'last_status': final_status
+    }
     
     if verbose:
         log(f"DEBUG - Simplified output: {simplified_json_output}", "INFO")
@@ -297,24 +302,50 @@ def update_site_entry(site_name: str, all_domains_data: dict):
 
     current_full_url = site_config.get('full_url')
     current_domain_tld = site_config.get('domain')
+    current_ip = site_config.get('ip')
+    current_status = site_config.get('last_status')
+
     found_domain_info = find_new_domain(current_full_url, verbose=False, json_output=True)
 
     if found_domain_info and found_domain_info.get('full_url') and found_domain_info.get('domain'):
         new_full_url = found_domain_info['full_url']
         new_domain_tld = found_domain_info['domain']
+        new_ip = found_domain_info.get('ip')
+        new_status = found_domain_info.get('last_status')
 
-        if new_full_url != current_full_url or new_domain_tld != current_domain_tld:
-            log(f"Update found for {site_name}: URL '{current_full_url}' -> '{new_full_url}', TLD '{current_domain_tld}' -> '{new_domain_tld}'", "SUCCESS")
+        changed = False
+        change_msgs = []
+
+        if new_full_url != current_full_url:
+            change_msgs.append(f"URL '{current_full_url}' -> '{new_full_url}'")
+            changed = True
+        if new_domain_tld != current_domain_tld:
+            change_msgs.append(f"TLD '{current_domain_tld}' -> '{new_domain_tld}'")
+            changed = True
+        if new_ip != current_ip:
+            change_msgs.append(f"IP '{current_ip}' -> '{new_ip}'")
+            changed = True
+        if new_status != current_status:
+            change_msgs.append(f"status '{current_status}' -> '{new_status}'")
+            changed = True
+
+        if changed:
+            log(f"Update found for {site_name}: {', '.join(change_msgs)}", "SUCCESS")
             updated_entry = site_config.copy()
             updated_entry['full_url'] = new_full_url
             updated_entry['domain'] = new_domain_tld
-            if new_domain_tld != current_domain_tld :
+            if new_domain_tld != current_domain_tld:
                 updated_entry['old_domain'] = current_domain_tld if current_domain_tld else ""
+
+            # always update ip and status fields
+            if new_ip is not None:
+                updated_entry['ip'] = new_ip
+            if new_status is not None:
+                updated_entry['last_status'] = new_status
 
             updated_entry['time_change'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             all_domains_data[site_name] = updated_entry
             return True
-        
         else:
             log(f"No changes detected for {site_name}.", "INFO")
             return False
