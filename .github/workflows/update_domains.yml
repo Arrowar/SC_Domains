@@ -2,7 +2,7 @@ name: Update Domains
 
 on:
   schedule:
-    - cron: "*/20 7-22 * * *"
+    - cron: "*/20 6-23 * * *"
   workflow_dispatch:
 
 jobs:
@@ -39,13 +39,16 @@ jobs:
       
       - name: Commit and push if changes detected
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          OWNER="${{ github.repository_owner }}"
+          OWNER_EMAIL="${OWNER}@users.noreply.github.com"
+          
+          git config --global user.name "${OWNER}"
+          git config --global user.email "${OWNER_EMAIL}"
           
           if ! git diff --quiet domains.json; then
             echo "Changes detected - creating new commit"
             git add domains.json
-            git commit -m "🔄 Update domains - $(date +'%Y-%m-%d %H:%M:%S')"
+            git commit -m "Update - $(date +'%Y-%m-%d %H:%M:%S')"
             git push
             echo "Changes committed and pushed"
           else
