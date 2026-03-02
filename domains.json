@@ -18,10 +18,10 @@
     "time_change": "2025-03-21 12:20:27"
   },
   "cb01new": {
-    "domain": "live",
-    "full_url": "https://cb01uno.live/",
-    "old_domain": "icu",
-    "time_change": "2026-02-23 17:58:16"
+    "domain": "download",
+    "full_url": "https://cb01uno.download/",
+    "old_domain": "live",
+    "time_change": "2026-03-02 15:57:15"
   },
   "cb01_2": {
     "domain": "it",
