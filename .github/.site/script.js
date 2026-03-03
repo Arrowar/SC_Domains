@@ -187,12 +187,6 @@ async function loadSiteData() {
           siteInfo.appendChild(lastUpdate);
         }
 
-        if (site.old_domain) {
-          const oldDomain = document.createElement('span');
-          oldDomain.className = 'old-domain';
-          oldDomain.innerHTML = `<i class="fas fa-history"></i> ${site.old_domain}`;
-          siteInfo.appendChild(oldDomain);
-        }
 
         siteItem.addEventListener('click', function() {
           window.open(site.full_url, '_blank', 'noopener,noreferrer');
