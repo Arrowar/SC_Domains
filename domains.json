@@ -39,14 +39,14 @@
   "guardoserie_2": {
     "domain": "space",
     "full_url": "https://guardoserie.space/",
-    "time_change": "2026-03-03 06:42:21",
+    "time_change": "2026-03-05 23:29:24",
     "last_status": 200
   },
   "altadefinizione": {
     "domain": "autos",
     "full_url": "https://altadefinizione.autos/",
-    "time_change": "2026-03-05 22:00:19",
-    "last_status": 403
+    "time_change": "2026-03-05 23:29:25",
+    "last_status": 200
   },
   "streamingcommunity": {
     "domain": "computer",
