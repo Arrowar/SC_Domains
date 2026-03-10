@@ -51,14 +51,14 @@
   "streamingcommunity": {
     "domain": "ist",
     "full_url": "https://streamingcommunityz.ist/",
-    "time_change": "2026-03-10 20:50:42",
-    "last_status": 403
+    "time_change": "2026-03-10 21:55:00",
+    "last_status": 200
   },
   "streamingunity": {
     "domain": "buzz",
     "full_url": "https://streamingunity.buzz/",
-    "time_change": "2026-03-10 20:50:43",
-    "last_status": 403
+    "time_change": "2026-03-10 21:55:00",
+    "last_status": 200
   },
   "guardaplay": {
     "domain": "space",
