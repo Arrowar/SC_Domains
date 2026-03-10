@@ -18,10 +18,10 @@
     "last_status": 200
   },
   "cb01new": {
-    "domain": "digital",
-    "full_url": "https://cb01uno.digital/",
+    "domain": "life",
+    "full_url": "https://cb01uno.life/",
     "old_domain": "live",
-    "time_change": "2026-03-09 15:13:05",
+    "time_change": "2026-03-10 06:40:07",
     "last_status": 200
   },
   "cb01_2": {
@@ -73,9 +73,9 @@
     "last_status": 403
   },
   "filmpertutti": {
-    "domain": "sbs",
-    "full_url": "https://film-pertutti.sbs/",
-    "time_change": "2026-03-05 06:43:07",
+    "domain": "pics",
+    "full_url": "https://film-pertutti.pics/",
+    "time_change": "2026-03-10 06:40:13",
     "last_status": 200
   },
   "tantifilm": {
@@ -86,9 +86,9 @@
     "last_status": 200
   },
   "tantifilm_2": {
-    "domain": "cfd",
-    "full_url": "https://tanti-film.cfd/",
-    "time_change": "2026-03-05 06:43:08",
+    "domain": "bond",
+    "full_url": "https://tanti-film.bond/",
+    "time_change": "2026-03-10 06:40:13",
     "last_status": 200
   },
   "casaciname": {
