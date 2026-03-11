@@ -106,8 +106,8 @@
   "mappl": {
     "domain": "tv",
     "full_url": "https://mappl.tv/",
-    "time_change": "2026-03-10 20:50:50",
-    "last_status": 200
+    "time_change": "2026-03-11 09:02:07",
+    "last_status": 403
   },
   "hydrahd": {
     "domain": "ru",
