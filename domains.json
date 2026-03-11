@@ -49,9 +49,9 @@
     "last_status": 200
   },
   "streamingcommunity": {
-    "domain": "ist",
-    "full_url": "https://streamingcommunityz.ist/",
-    "time_change": "2026-03-10 21:55:00",
+    "domain": "loan",
+    "full_url": "https://streamingcommunityz.loan/",
+    "time_change": "2026-03-11 19:11:35",
     "last_status": 200
   },
   "streamingunity": {
@@ -106,8 +106,8 @@
   "mappl": {
     "domain": "tv",
     "full_url": "https://mappl.tv/",
-    "time_change": "2026-03-11 17:12:24",
-    "last_status": 403
+    "time_change": "2026-03-11 19:11:44",
+    "last_status": 200
   },
   "hydrahd": {
     "domain": "ru",
